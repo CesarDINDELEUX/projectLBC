@@ -31,7 +31,6 @@ public class RegisterServlet extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String login = request.getParameter("login");
         String password = request.getParameter("password");
         String passwordconfirmation = request.getParameter("passwordconfirmation");
         String email = request.getParameter("email");
@@ -41,7 +40,7 @@ public class RegisterServlet extends HttpServlet {
         if(password.equals(passwordconfirmation)) {
 
             Utilisateur utilisateur = new Utilisateur();
-            utilisateur.setId(login);
+            utilisateur.setId(email);
             utilisateur.setPassword(password);
             utilisateur.setNom(nom);
             utilisateur.setTelephone(telephone);

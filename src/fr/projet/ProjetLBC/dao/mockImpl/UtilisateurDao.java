@@ -1,4 +1,4 @@
-package fr.projet.ProjetLBC.dao.mockImpl;
+/*package fr.projet.ProjetLBC.dao.mockImpl;
 
 import fr.projet.ProjetLBC.beans.Utilisateur;
 
@@ -66,3 +66,4 @@ public class UtilisateurDao implements fr.projet.ProjetLBC.dao.IUtilisateurDao {
     }
 
 }
+*/

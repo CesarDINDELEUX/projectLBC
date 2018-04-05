@@ -3,16 +3,19 @@ package fr.projet.ProjetLBC.dao.hsqlImpl;
 import fr.projet.ProjetLBC.beans.Utilisateur;
 import fr.projet.ProjetLBC.dao.IUtilisateurDao;
 
+import javax.rmi.CORBA.Util;
+import javax.servlet.http.HttpSession;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UtilisateurDao implements IUtilisateurDao {
-    private static List<Utilisateur> listOfUsers;
+private static List<Utilisateur> listOfUsers;
 
 
 
     @Override
-    public void getAllUsers(Utilisateur utilisateur) {
+    public List<Utilisateur> getAllUsers() {
         try {
             Class.forName("org.hsqldb.jdbcDriver");
         } catch (ClassNotFoundException e2) {
@@ -23,18 +26,33 @@ public class UtilisateurDao implements IUtilisateurDao {
 
         try {
             con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost:9003");
-            PreparedStatement ps = con.prepareStatement("INSERT INTO UTILISATEURS VALUES (?,?,?,?)");
-            ps.setString(1, utilisateur.getId());
-            ps.setString(2, utilisateur.getPassword());
-            ps.setBoolean(3, false);
-            ps.setString(4, utilisateur.getNom());
-            ps.execute();
+            listOfUsers = new ArrayList<>();
+            Statement stm;
+            stm = con.createStatement();
+            String sql = "Select * From UTILISATEURS";
+            ResultSet rst;
+            rst = stm.executeQuery(sql);
+            ArrayList<Utilisateur> listUser = new ArrayList<>();
+            while (rst.next()) {
+                Utilisateur usesss = new Utilisateur();
+                usesss.setNom(rst.getString("NAME"));
+                usesss.setPassword(rst.getString("PASSWORD"));
+                usesss.setId(rst.getString("ID"));
+                usesss.setAdministrateur(rst.getBoolean("ISADMINISTRATOR"));
+                listOfUsers.add(usesss);
+            }
+            return listOfUsers;
+
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return  listOfUsers;
     }
 
     public static Utilisateur getUtilisateur(String userId) {
+        Utilisateur u = new Utilisateur();
         try {
             Class.forName("org.hsqldb.jdbcDriver");
         } catch (ClassNotFoundException e2) {
@@ -46,21 +64,20 @@ public class UtilisateurDao implements IUtilisateurDao {
 
         try {
             con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost:9003");
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM users WHERE id = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM UTILISATEURS WHERE id = ?");
             ps.setString(1, userId);
+
             resultats = ps.executeQuery();
             while (resultats.next()) {
-                return new Utilisateur( resultats.getString(1),
-                                        resultats.getString(2),
-                                        resultats.getString(3),
-                                        resultats.getString(4),
-                                        resultats.getBoolean(5));
+                u.setId(resultats.getString(1));
+                u.setNom(resultats.getString(4));
+                u.setAdministrateur(resultats.getBoolean(3));
             }
 
         } catch (SQLException e1) {
             e1.printStackTrace();
         }
-        return null;
+        return u;
     }
 
     @Override
@@ -103,7 +120,7 @@ public class UtilisateurDao implements IUtilisateurDao {
     public boolean checkLogin(Utilisateur utilisateur) {
         boolean accesOk = false;
         Utilisateur existingUser = null;
-        for (Utilisateur u: listOfUsers) {
+        for (Utilisateur u: getAllUsers()) {
             if (u.getId().equals(utilisateur.getId())) {
                 existingUser = u;
                 break;
@@ -113,6 +130,7 @@ public class UtilisateurDao implements IUtilisateurDao {
             accesOk = (utilisateur.getId().equals(existingUser.getId())
                     && utilisateur.getPassword().equals(existingUser.getPassword()));
         }
+
         return accesOk;
     }
 

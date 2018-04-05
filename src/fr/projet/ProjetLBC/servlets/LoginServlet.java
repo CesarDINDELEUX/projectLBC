@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -31,17 +32,21 @@ public class LoginServlet extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String login = request.getParameter("Username");
+        String email = request.getParameter("email");
         String password = request.getParameter("Password");
+        String nom = request.getParameter("nom");
         Utilisateur utilisateur = new Utilisateur();
-        utilisateur.setId(login);
+        utilisateur.setId(email);
         utilisateur.setPassword(password);
+        utilisateur.setNom(nom);
         IUtilisateurDao userDao = new UtilisateurDao();
         if (userDao.checkLogin(utilisateur)) {
+            HttpSession session = request.getSession();
+            session.setAttribute("USERID",email);
             IAnnonceDao annonceDao = new AnnonceDao();
-            List<Annonce> myAnnonces = annonceDao.getListOfAnnoncesWithID(login);
+            List<Annonce> myAnnonces = annonceDao.getListOfAnnoncesWithID(email);
             request.setAttribute("ANNONCES", myAnnonces);
-            request.getRequestDispatcher("annonces.jsp").forward(request, response);
+            request.getRequestDispatcher("index2.html").forward(request, response);
         } else {
             request.getRequestDispatcher("login.html").forward(request, response);
         }

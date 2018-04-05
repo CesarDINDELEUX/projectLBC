@@ -15,19 +15,15 @@
 <div  class="row">
     <form class="col s12" action="/RegisterServlet" method="POST">
         <div class="row">
-            <div class="input-field col s6">
-                <input placeholder="Placeholder" id="first_name" type="text" class="validate" name="nom">
-                <label for="first_name">Nom</label>
-            </div>
-            <div class="input-field col s6">
-                <input placeholder="Placeholder" id="last_name" type="tel" class="validate" name="telephone">
-                <label for="last_name">telephone</label>
+            <div class="input-field col 12">
+                <input placeholder="Placeholder" id="nom" type="text" class="validate" name="nom">
+                <label for="nom">Nom</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <input id="login" type="text" class="validate" name="login">
-                <label for="login">Login</label>
+                <input id="email" type="email" class="validate" name="email">
+                <label for="email">Email</label>
             </div>
         </div>
         <div class="row">
@@ -42,12 +38,7 @@
                 <label for="passwordConfirmation">Retaper le mot de passe</label>
             </div>
         </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <input id="email" type="email" class="validate" name="email">
-                <label for="email">Email</label>
-            </div>
-        </div>
+
         <button class="login-btn" type="submit" >Go</button>
     </form>
 </div>

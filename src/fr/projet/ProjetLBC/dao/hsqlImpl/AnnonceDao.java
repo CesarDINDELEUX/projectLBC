@@ -15,6 +15,21 @@ public class AnnonceDao implements IAnnonceDao{
 
     @Override
     public List<Annonce> getListOfAnnoncesWithUser(Utilisateur utilisateur) {
+        return null;
+    }
+
+    @Override
+    public List<Annonce> getListOfAnnoncesWithID(String id) {
+        return null;
+    }
+
+    @Override
+    public List<Annonce> getListOfAnnonces() {
+        return null;
+    }
+
+    @Override
+    public List<Annonce> getAllAnnonces() {
         String url = "127.0.0.1:9003";
         Connection con;
 
@@ -29,12 +44,16 @@ public class AnnonceDao implements IAnnonceDao{
                 annonce.setId(results.getInt(1));
                 annonce.setTitre(results.getString(2));
                 annonce.setContent(results.getString(3));
-
                 Utilisateur userDao = UtilisateurDao.getUtilisateur(results.getString(4));
-
                 annonce.setVendeur(userDao);
                 annonce.setCreation(results.getDate(5));
-
+                annonce.setModification(results.getDate(6));
+                annonce.setStatut(results.getInt(7));
+                Utilisateur userDao2 = UtilisateurDao.getUtilisateur(results.getString(8));
+                annonce.setAcheteur(userDao2);
+                annonce.setAchat(results.getDate(9));
+                annonce.setPrix(results.getDouble(10));
+                annonce.setNbVues(results.getInt(11));
                 annonces.add(annonce);
             }
         }catch (SQLException e1) {
@@ -44,43 +63,10 @@ public class AnnonceDao implements IAnnonceDao{
     }
 
     @Override
-    public List<Annonce> getListOfAnnoncesWithID(String id) {
-        return null;
-    }
-
-    @Override
-    public List<Annonce> getListOfAnnonces() {
-        return null;
-    }
-
-    @Override
     public Annonce getAnnonce(String loginID) {
-        String url = "127.0.0.1:9003";
-        Connection con;
-
-        try {
-            con = DriverManager.getConnection("jdbc:hsqldb:hsql://" + url, "SA", "");
-            Statement stmt = con.createStatement();
-            ResultSet results = stmt.executeQuery("SELECT * FROM ANNONCES WHERE ID = ?");
-            while (results.next()) {
-                // Parcours des annonces
-                Annonce annonce = new Annonce();
-                annonce.setId(results.getInt(1));
-                annonce.setTitre(results.getString(2));
-                annonce.setContent(results.getString(3));
-
-                Utilisateur userDao = UtilisateurDao.getUtilisateur(results.getString(4));
-
-                annonce.setVendeur(userDao);
-                annonce.setCreation(results.getDate(5));
-                return annonce;
-
-            }
-        }catch (SQLException e1) {
-            e1.printStackTrace();
-        }
         return null;
     }
+
 
     @Override
     public void addAnnonce(Annonce annonce) {
@@ -88,23 +74,9 @@ public class AnnonceDao implements IAnnonceDao{
         String url = "127.0.0.1:9003";
         Connection con;
         try {
-            String sqlIdentifier = "select MAX(ID) from ANNONCES";
-            con = DriverManager.getConnection("jdbc:hsqldb:hsql://" + url, "SA", "");
-            Statement stmt = con.createStatement();
-            ResultSet results = stmt.executeQuery("SELECT * FROM ANNONCES WHERE ID = ?");
-
-            while (results.next()) {
-                nextId = results.getLong(1) + 1;
-            }
-
-        }catch (SQLException e1) {
-            e1.printStackTrace();
-        }
-
-        try {
             con = DriverManager.getConnection("jdbc:hsqldb:hsql://" + url, "SA", "");
             PreparedStatement ps = con.prepareStatement("INSERT INTO ANNONCES(ID, TITLE, CONTENT, USER_ID, CREATION_DATE," +
-                    " UPDATE_DATE, PRIX, STATUS, BUYER, BUY_DATE, VUE) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+                    " UPDATE_DATE, PRICE, STATUS, BUYER, PURCHASE_DATE, NBVUES) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
             ps.setLong(1, nextId);
             ps.setString(2, annonce.getTitre());
             ps.setString(3, annonce.getContent());
@@ -113,12 +85,13 @@ public class AnnonceDao implements IAnnonceDao{
             ps.setObject(6, annonce.getModification());
             ps.setDouble(7, annonce.getPrix());
             ps.setInt(8, annonce.getStatut());
-            ps.setString(9, annonce.getAcheteur().getID());
-            ps.setObject(10, annonce.getAchat().toInstant().atZone(ZoneId.of("Europe/Paris")).toLocalDate());
+            ps.setString(9, null);
+            ps.setObject(10, annonce.getAchat());
             ps.setLong(11, annonce.getNbVues());
             ps.execute();
 
-        }catch (SQLException e1) {
+        }
+        catch (SQLException e1) {
             e1.printStackTrace();
         }
     }
