@@ -7,7 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0abbd21-4695-4945-8ad6-45dd46f4647c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -56,8 +55,8 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+            <state relative-caret-position="45">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
@@ -163,8 +162,7 @@
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="72" />
+  <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="810" />
@@ -181,11 +179,6 @@
             <path>
               <item name="fr.projet.ProjetLBC" type="b2602c69:ProjectViewProjectNode" />
               <item name="fr.projet.ProjetLBC" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fr.projet.ProjetLBC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fr.projet.ProjetLBC" type="462c0819:PsiDirectoryNode" />
-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="fr.projet.ProjetLBC" type="b2602c69:ProjectViewProjectNode" />
@@ -392,7 +385,7 @@
       <workItem from="1522738387748" duration="13258000" />
       <workItem from="1522832016833" duration="820000" />
       <workItem from="1522833671650" duration="13013000" />
-      <workItem from="1522972155938" duration="170000" />
+      <workItem from="1522972155938" duration="240000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'master' of https://github.com/Raziegel/AnnoncesJEE&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;fr.projet.ProjetLBC.iml&#10;#&#9;out/artifacts/fr_projet_ProjetLBC_war_exploded/WEB-INF/classes/fr/projet/ProjetLBC/dao/hsqlImpl/AnnonceDao.class&#10;#&#9;out/artifacts/fr_projet_ProjetLBC_war_exploded/WEB-INF/classes/fr/projet/ProjetLBC/listeners/StartupListner.class&#10;#&#9;out/artifacts/fr_projet_ProjetLBC_war_exploded/WEB-INF/classes/fr/projet/ProjetLBC/servlets/LoginServlet.class&#10;#&#9;out/artifacts/fr_projet_ProjetLBC_war_exploded/WEB-INF/classes/fr/projet/ProjetLBC/servlets/getAnnoncesServlet.class&#10;#&#9;out/artifacts/fr_projet_ProjetLBC_war_exploded/login.html&#10;#&#9;out/production/fr.projet.ProjetLBC/fr/projet/ProjetLBC/dao/hsqlImpl/AnnonceDao.class&#10;#&#9;out/production/fr.projet.ProjetLBC/fr/projet/ProjetLBC/listeners/StartupListner.class&#10;#&#9;out/production/fr.projet.ProjetLBC/fr/projet/ProjetLBC/servlets/LoginServlet.class&#10;#&#9;out/production/fr.projet.ProjetLBC/fr/projet/ProjetLBC/servlets/getAnnoncesServlet.class&#10;#&#9;src/fr/projet/ProjetLBC/dao/hsqlImpl/AnnonceDao.java&#10;#&#9;src/fr/projet/ProjetLBC/dao/mockImpl/AnnonceDao.java&#10;#&#9;src/fr/projet/ProjetLBC/dao/mockImpl/UtilisateurDao.java">
       <created>1522740043591</created>
@@ -436,11 +429,18 @@
       <option name="project" value="LOCAL" />
       <updated>1522972284421</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Merge branch 'master' of https://github.com/Raziegel/AnnoncesJEE&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;fr.projet.ProjetLBC.iml&#10;#&#9;out/artifacts/fr_projet_ProjetLBC_war_exploded/WEB-INF/classes/fr/projet/ProjetLBC/dao/hsqlImpl/AnnonceDao.class&#10;#&#9;out/artifacts/fr_projet_ProjetLBC_war_exploded/WEB-INF/classes/fr/projet/ProjetLBC/listeners/StartupListner.class&#10;#&#9;out/artifacts/fr_projet_ProjetLBC_war_exploded/WEB-INF/classes/fr/projet/ProjetLBC/servlets/LoginServlet.class&#10;#&#9;out/artifacts/fr_projet_ProjetLBC_war_exploded/WEB-INF/classes/fr/projet/ProjetLBC/servlets/getAnnoncesServlet.class&#10;#&#9;out/artifacts/fr_projet_ProjetLBC_war_exploded/login.html&#10;#&#9;out/production/fr.projet.ProjetLBC/fr/projet/ProjetLBC/dao/hsqlImpl/AnnonceDao.class&#10;#&#9;out/production/fr.projet.ProjetLBC/fr/projet/ProjetLBC/listeners/StartupListner.class&#10;#&#9;out/production/fr.projet.ProjetLBC/fr/projet/ProjetLBC/servlets/LoginServlet.class&#10;#&#9;out/production/fr.projet.ProjetLBC/fr/projet/ProjetLBC/servlets/getAnnoncesServlet.class&#10;#&#9;src/fr/projet/ProjetLBC/dao/hsqlImpl/AnnonceDao.java&#10;#&#9;src/fr/projet/ProjetLBC/dao/mockImpl/AnnonceDao.java&#10;#&#9;src/fr/projet/ProjetLBC/dao/mockImpl/UtilisateurDao.java&#10;&#10;&#10;&#10;Page Acceuil + Responsive + Login + Creer une annonce">
+      <created>1522972336114</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1522972336114</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38342000" />
+    <option name="totallyTimeSpent" value="38412000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="813" extended-state="6" />
@@ -912,8 +912,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+        <state relative-caret-position="45">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
