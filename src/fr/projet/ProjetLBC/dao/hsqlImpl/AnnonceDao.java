@@ -3,7 +3,9 @@ package fr.projet.ProjetLBC.dao.hsqlImpl;
 import fr.projet.ProjetLBC.beans.Annonce;
 import fr.projet.ProjetLBC.beans.Utilisateur;
 import fr.projet.ProjetLBC.dao.IAnnonceDao;
+import org.omg.CORBA.Request;
 
+import javax.jms.Session;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +21,40 @@ public class AnnonceDao implements IAnnonceDao{
     }
 
     @Override
-    public List<Annonce> getListOfAnnoncesWithID(String id) {
-        return null;
+    public List<Annonce> getListOfAnnoncesWithID(String userid) {
+        String url = "127.0.0.1:9003";
+        Connection con;
+
+        List<Annonce> annonces = new ArrayList<>();
+        try {
+            con = DriverManager.getConnection("jdbc:hsqldb:hsql://" + url, "SA", "");
+            Statement stmt = con.createStatement();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM ANNONCES WHERE USER_ID = ?");
+            ps.setString(1, userid);
+
+            ResultSet results = ps.executeQuery();
+            while (results.next()) {
+                // Parcours des annonces
+                Annonce annonce = new Annonce();
+                annonce.setId(results.getInt(1));
+                annonce.setTitre(results.getString(2));
+                annonce.setContent(results.getString(3));
+                Utilisateur userDao = UtilisateurDao.getUtilisateur(results.getString(4));
+                annonce.setVendeur(userDao);
+                annonce.setCreation(results.getDate(5));
+                annonce.setModification(results.getDate(6));
+                annonce.setStatut(results.getInt(7));
+                Utilisateur userDao2 = UtilisateurDao.getUtilisateur(results.getString(8));
+                annonce.setAcheteur(userDao2);
+                annonce.setAchat(results.getDate(9));
+                annonce.setPrix(results.getDouble(10));
+                annonce.setNbVues(results.getInt(11));
+                annonces.add(annonce);
+            }
+        }catch (SQLException e1) {
+            e1.printStackTrace();
+        }
+        return annonces;
     }
 
     @Override

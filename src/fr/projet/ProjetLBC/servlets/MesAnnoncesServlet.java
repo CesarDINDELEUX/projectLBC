@@ -16,14 +16,14 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/MesAnnoncesServlet")
+public class MesAnnoncesServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public MesAnnoncesServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,22 +32,32 @@ public class LoginServlet extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String password = request.getParameter("Password");
-        String nom = request.getParameter("nom");
-        Utilisateur utilisateur = new Utilisateur();
-        utilisateur.setId(email);
-        utilisateur.setPassword(password);
-        utilisateur.setNom(nom);
-        IUtilisateurDao userDao = new UtilisateurDao();
-        if (userDao.checkLogin(utilisateur)) {
-            HttpSession session = request.getSession();
-            session.setAttribute("USERID",email);
-            IAnnonceDao annonceDao = new AnnonceDao();
-            request.getRequestDispatcher("index.html").forward(request, response);
-        } else {
+
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        HttpSession session = request.getSession();
+
+        if (session.getAttribute("USERID") != null) {
+            String emailUtilisateur = session.getAttribute("USERID").toString();
+            if (!(emailUtilisateur.equals(null) || emailUtilisateur.equals(""))) {
+                AnnonceDao annonceDao = new AnnonceDao();
+                List<Annonce> lol = annonceDao.getListOfAnnoncesWithID(emailUtilisateur);
+                request.setAttribute("ANNONCES", lol);
+                request.getRequestDispatcher("mesAnnonces.jsp").forward(request, response);
+            }
+            else{
+                request.getRequestDispatcher("login.html").forward(request, response);
+            }
+        }
+        else{
             request.getRequestDispatcher("login.html").forward(request, response);
         }
+
+
+
+
     }
 
 }
